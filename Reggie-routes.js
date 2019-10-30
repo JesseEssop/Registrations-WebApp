@@ -30,32 +30,32 @@ module.exports = function ReggieRoutes(pool) {
         res.redirect('/');
     }
 
-    async function regFilter(res, req) {
+    // async function regFilter(res, req) {
 
-        var filter = req.body.regType
+    //     var filter = req.body.regType
 
-        await pool.query('SELECT * FROM Reg_plates WHERE regNumber = $1', [newReggie])
+    //     await pool.query('SELECT * FROM Reg_plates WHERE regNumber = $1', [newReggie])
 
-        if (filter === "CA") {
-            await pool.query('SELECT Reg_location.town, Reg_plates.regnumber FROM Reg_location INNER JOIN Reg_plates ON Reg_location.id = Reg_plates.reg_id WHERE Reg_location.id = 1;')
+    //     if (filter === "CA") {
+    //         await pool.query('SELECT Reg_location.town, Reg_plates.regnumber FROM Reg_location INNER JOIN Reg_plates ON Reg_location.id = Reg_plates.reg_id WHERE Reg_location.id = 1;')
             
-        }
+    //     }
 
-        if (filter === "CY") {
+    //     if (filter === "CY") {
            
-        }
+    //     }
 
-        if (filter === "CK") {
-            return malmesburyCars.rows
-        }
+    //     if (filter === "CK") {
+    //         return malmesburyCars.rows
+    //     }
 
-        res.redirect('/')
-    }
+    //     res.redirect('/')
+    // }
 
 
     return {
         indexRoute,
         settingsRoute,
-        regFilter
+        // regFilter
     }
 }
