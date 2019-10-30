@@ -43,7 +43,7 @@ app.use(bodyParser.json())
 
 app.get('/', regRoute.indexRoute);
 app.post('/settings', regRoute.settingsRoute);
-app.get('/filter',regRoute.regFilter )
+
 
 // app.get('/reg',)
 
