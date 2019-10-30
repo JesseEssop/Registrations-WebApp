@@ -16,26 +16,26 @@ describe('Registration Numbers test', function () {
         let testInstance = RegCheck(pool);
         await testInstance.resetReg();
     })
-    it('This test does not take in a registration number that has special characters', async function () {
+    it('This test takes in a registration number that has special characters and returns an error', async function () {
         var testInstance = RegCheck(pool);
-        await testInstance.add("CA 9798@#$%");
-        assert.equal(testInstance.add("CA 9798@#$%"), undefined);
-        await testInstance.add("CY !@#$%^9*&^");
-        assert.equal(testInstance.add("CY !@#$%^9*&^"), undefined);
-        await testInstance.add("CK 3653@#^22");
-        assert.equal(testInstance.add("CK 3653@#^22"), undefined);
+        // await testInstance.add("CA 9798@#$%");
+        assert.equal(await testInstance.add("CA 9798@#$%"), "INVALID REGISTRATION");
+        // await testInstance.add("CY !@#$%^9*&^");
+        assert.equal(await testInstance.add("CY !@#$%^9*&^"), "INVALID REGISTRATION");
+        // await testInstance.add("CK 3653@#^22");
+        assert.equal(await testInstance.add("CK 3653@#^22"), "INVALID REGISTRATION");
     })
-    it('This test takes in an empty string and returns undefined', async function () {
+    it('This test takes in an empty string and returns an error messsage', async function () {
         var testInstance = RegCheck(pool);
         await testInstance.add(" ");
-        assert.equal(testInstance.add("CA"), undefined);
-        assert.equal(testInstance.add("CK"), undefined);
-        assert.equal(testInstance.add("CY"), undefined);
+        assert.equal(await testInstance.add("CA"), "INVALID REGISTRATION");
+        assert.equal(await testInstance.add("CK"), "INVALID REGISTRATION");
+        assert.equal(await testInstance.add("CY"), "INVALID REGISTRATION");
     })
     it('This test returns an error message when the same registration number is entered ', async function () {
         var testInstance = RegCheck(pool);
         await testInstance.add("CA 364 968");
         await testInstance.add("CA 364 968");
-        assert.equal(testInstance.error(), "Registration number already entered");
+        assert.equal(testInstance.error(), "REGISTRATION ALREADY EXISTS");
     })
 })
