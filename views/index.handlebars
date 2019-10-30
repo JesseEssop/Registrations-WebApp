@@ -1,0 +1,56 @@
+<div class="RegNumbers">
+    <div class="box1">
+        <h1 class="center" style="margin-top:0px">Registration Numbers</h1>
+    </div>
+
+    <div class="row">
+
+        <div class="col-12">
+            <form action="/settings" method="POST">
+                <div class="center" style="width:200px;">
+                    Enter Registration Number:
+                    <input class="textArea" type="string" maxlength=10 name="regnum">
+                    <button class="button-primary addBtn" on type="submit" name="add">Add</button>
+                    <button class="button-primary resetBtn" on value='reset' type="sumbit" name="reset">Reset</button>
+                </div>
+            </form>
+            <form action="/filter" method="POST">
+                <div class="center" style="width:200px;margin-bottom:10px;margin-top:20px;color: whitesmoke">
+                    eg. CA 768 987
+                </div>
+                <div class="center" style="margin-top:30px">
+                    <label>
+                        <input type="radio" name="regType" class="regTypeRadio" value="CA">
+                        <span class="English" style="color:gold">Cape Town</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="regType" class="regTypeRadio" value="CY">
+                        <span class="Afrikaans" style="color:gold">Bellville</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="regType" class="regTypeRadio" value="CK">
+                        <span class="isiXhosa" style="color:gold">Malmesbury</span>
+                    </label>
+                    <button class='center' name="show" type="submit"style="margin-left:10px">Show Registration</button>
+                </div>
+
+                <div class="center">
+                    <div class="Error">
+                        {{messages.error}}
+                    </div>
+                </div>
+
+                <div class="center">
+                    <strong>Registration Numbers:</strong>
+
+                    <ul>
+                        {{#each regNums}}
+                        <li>{{regnumber}}</li>
+                        {{/each}}
+                    </ul>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
