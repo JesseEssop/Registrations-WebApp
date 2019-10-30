@@ -5,9 +5,9 @@ module.exports = function RegCheck(pool) {
     var newReggie;
     var car;
     var allCars;
-    var capeCars;
-    var bellvilleCars;
-    var malmesburyCars;
+    // var capeCars;
+    // var bellvilleCars;
+    // var malmesburyCars;
     var error
 
 
