@@ -36,6 +36,6 @@ describe('Registration Numbers test', function () {
         var testInstance = RegCheck(pool);
         await testInstance.add("CA 364 968");
         await testInstance.add("CA 364 968");
-        assert.equal(testInstance.error(), "REGISTRATION ALREADY EXISTS");
+        assert.equal(await testInstance.error(), "REGISTRATION ALREADY EXISTS");
     })
 })
