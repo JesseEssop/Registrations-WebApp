@@ -5,7 +5,7 @@ module.exports = function ReggieRoutes(pool) {
 
     async function indexRoute(req, res) {
         res.render('index', {
-            regNums: await reggie.allReggies()
+            regNums: await reggie.carFilter()
         });
     }
 
@@ -30,9 +30,34 @@ module.exports = function ReggieRoutes(pool) {
         res.redirect('/');
     }
 
+    async function filterRoute(req, res) {
+        var town = req.body.townDropDown
+        // console.log(town)
+
+        if (town === '') {
+            await reggie.allReggies();
+        }
+
+        if (town === 'CA') {
+            await reggie.CAcars()
+         
+        }
+
+        if (town === 'CY') {
+            await reggie.CYcars()
+        }
+
+        if (town === 'CK') {
+           await reggie.CKcars()
+        }
+
+        res.redirect('/')
+    }
+
 
     return {
         indexRoute,
         settingsRoute,
+        filterRoute
     }
 }
