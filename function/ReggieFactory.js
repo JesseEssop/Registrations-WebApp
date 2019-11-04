@@ -18,7 +18,7 @@ module.exports = function RegCheck(pool) {
 
         if (testReg(oldReg)) {
             car = await pool.query('SELECT * FROM Reg_plates WHERE regNumber = $1', [newReggie]);
-
+            console.log(car.rows);
             if (car.rows.length === 0) {
 
                 if (newReggie.startsWith('CA')) {
