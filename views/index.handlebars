@@ -8,22 +8,22 @@
             <form action="/settings" method="POST">
                 <div class="center" style="width:200px;">
                    <div style="color:white"> Enter Registration Number:</div>
-                    <input class="textArea" type="string" maxlength=10 name="regnum">
+                    <input class="textArea" type="string" maxlength=10 name="regnum" placeholder="eg. CA 768 987"style="margin-bottom:10px">
                     <button class="button-primary addBtn" on type="submit" name="add">Add</button>
-                    <button class="button-primary resetBtn" on value='reset' type="sumbit" name="reset">Reset</button>
+                    <button class="button-primary resetBtn" on value='reset' type="sumbit" name="reset" style="height:30px;width:70px; font-size:18px;">Reset</button>
                 </div>
             </form>
 
             <form action="/filter" method="POST">
-                <div class="center" style="width:200px;margin-bottom:10px;margin-top:20px;color: whitesmoke">
-                    eg. CA 768 987
+                <div class="center" style="width:200px;margin-top:20px;color: whitesmoke">
+                    
                     <select id="townDrop" name="townDropDown">
                         <option value="">Show All</option>
                         <option value="CA">Cape Town</option>
                         <option value="CY">Bellville</option>
                         <option value="CK">Malmesbury</option>
                     </select>
-                    <button class="button-primary showBtn" type="submit" name="showReg" style="margin-top: 10px">Show
+                    <button class="button-primary showBtn" type="submit" name="showReg" style="height:30px; margin-top: 20px">Show
                         Registration</button>
             </form>
         </div>
