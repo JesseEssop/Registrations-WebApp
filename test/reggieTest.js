@@ -15,6 +15,10 @@ describe('Registration Numbers test', function () {
     beforeEach(async function () {
         let testInstance = RegCheck(pool);
         await testInstance.resetReg();
+
+        await pool.query('insert into reg_location (town) values ($1)', ['Cape Town']);
+        await pool.query('insert into reg_location (town) values ($1)', ['Bellville']);
+        await pool.query('insert into reg_location (town) values ($1)', ['Malmesbury']);
     })
     it('This test takes in a registration number that has special characters and returns an error', async function () {
         var testInstance = RegCheck(pool);

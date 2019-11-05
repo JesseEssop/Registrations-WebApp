@@ -11,10 +11,7 @@ module.exports = function RegCheck(pool) {
     var error
     var everything;
 
-
     async function addNewReg(oldReg) {
-
-        // console.log(oldReg)
 
         if (testReg(oldReg)) {
             car = await pool.query('SELECT * FROM reg_plates WHERE regnumber = $1', [newReggie]);
