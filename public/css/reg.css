@@ -16,7 +16,7 @@ body {
   left: 0;
   top: 0;
   font-size: 100%;
-  background-image: url(Cape_Town_N2.jpg);
+  background-image: url(carwall.jpg);
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
@@ -279,6 +279,12 @@ strong{
 .Error{
   margin-top: 30px;
   color:red;
+  font-family: 'Lato', Helvetica, sans-serif;
+  font-size: 20px;
+}
+.Error2{
+  margin-top: 30px;
+  color:green;
   font-family: 'Lato', Helvetica, sans-serif;
   font-size: 20px;
 }

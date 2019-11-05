@@ -10,22 +10,25 @@ module.exports = function ReggieRoutes(pool) {
     }
 
     async function settingsRoute(req, res) {
-        var cars = req.body.regnum
+        var cars = req.body.regnum.toUpperCase()
         var testcar = await reggie.testReg(cars);
 
         if (req.body.reset === 'reset') {
             await reggie.resetReg();
         }
         else {
-            if (cars.startsWith('CA') || cars.startsWith('CY') || cars.startsWith('CK')) {
-                await reggie.add(cars);
+
+            await reggie.add(cars);
+            
+            if (reggie.error()) {
+                req.flash('error', reggie.error())
             }
-            else {
-                req.flash('error', 'INVALID LOCATION')
+
+            else if(cars.startsWith('CA') ||cars.startsWith('CY') ||cars.startsWith('CK') || cars.startsWith('ca') || cars.startsWith('cy') || cars.startsWith('ck')){
+                req.flash('error2',"REGISTRATION SUCCESSFULLY ADDED !")
             }
-            if (testcar === false || cars.length < 0 || testcar === null) {
-                req.flash('error', 'INVALID REGISTRATION')
-            }
+
+            
         }
         res.redirect('/');
     }
@@ -40,7 +43,7 @@ module.exports = function ReggieRoutes(pool) {
 
         if (town === 'CA') {
             await reggie.CAcars()
-         
+
         }
 
         if (town === 'CY') {
@@ -48,7 +51,7 @@ module.exports = function ReggieRoutes(pool) {
         }
 
         if (town === 'CK') {
-           await reggie.CKcars()
+            await reggie.CKcars()
         }
 
         res.redirect('/')

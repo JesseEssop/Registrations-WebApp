@@ -12,26 +12,31 @@ module.exports = function RegCheck(pool) {
     var everything;
 
     async function addNewReg(oldReg) {
-
+        error = '';
         if (testReg(oldReg)) {
             car = await pool.query('SELECT * FROM reg_plates WHERE regnumber = $1', [newReggie]);
-            console.log(car.rows);
+
             if (car.rows.length === 0) {
 
                 if (newReggie.startsWith('CA')) {
                     await pool.query('insert into reg_plates (regnumber, reg_id) values ($1, $2)', [newReggie, 1]);
                     capeCars = await pool.query('SELECT reg_location.town, reg_plates.regnumber FROM reg_location INNER JOIN reg_plates ON reg_location.id = reg_plates.reg_id WHERE reg_location.id = 1')
-
-                }
-                if (newReggie.startsWith('CY')) {
+                    
+                } 
+                else if (newReggie.startsWith('CY')) {
                     await pool.query('insert into reg_plates (regnumber, reg_id) values ($1, $2)', [newReggie, 2]);
                     villeCars = await pool.query('SELECT reg_location.town, reg_plates.regnumber FROM reg_location INNER JOIN reg_plates ON reg_location.id = reg_plates.reg_id WHERE reg_location.id = 2')
+                    
                 }
-                if (newReggie.startsWith('CK')) {
+                else if (newReggie.startsWith('CK')) {
                     await pool.query('insert into reg_plates (regnumber, reg_id) values ($1, $2)', [newReggie, 3])
                     buryCars = await pool.query('SELECT reg_location.town, reg_plates.regnumber FROM reg_location INNER JOIN reg_plates ON reg_location.id = reg_plates.reg_id WHERE reg_location.id = 3')
+                    
                 }
-            } 
+                else {
+                    error = "INVALID LOCATION"
+                }
+            }
             else {
                 error = "REGISTRATION ALREADY EXISTS"
             }

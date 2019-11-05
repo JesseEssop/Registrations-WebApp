@@ -7,7 +7,7 @@
         <div class="col-12">
             <form action="/settings" method="POST">
                 <div class="center" style="width:200px;">
-                    Enter Registration Number:
+                   <div style="color:white"> Enter Registration Number:</div>
                     <input class="textArea" type="string" maxlength=10 name="regnum">
                     <button class="button-primary addBtn" on type="submit" name="add">Add</button>
                     <button class="button-primary resetBtn" on value='reset' type="sumbit" name="reset">Reset</button>
@@ -32,6 +32,10 @@
         <div class="center">
             <div class="Error">
                 {{messages.error}}
+            </div>
+
+             <div class="Error2">
+                {{messages.error2}}
             </div>
         </div>
 
