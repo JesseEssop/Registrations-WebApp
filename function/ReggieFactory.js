@@ -17,22 +17,22 @@ module.exports = function RegCheck(pool) {
         // console.log(oldReg)
 
         if (testReg(oldReg)) {
-            car = await pool.query('SELECT * FROM Reg_plates WHERE regNumber = $1', [newReggie]);
+            car = await pool.query('SELECT * FROM reg_plates WHERE regnumber = $1', [newReggie]);
             console.log(car.rows);
             if (car.rows.length === 0) {
 
                 if (newReggie.startsWith('CA')) {
-                    await pool.query('insert into Reg_plates (regNumber, reg_id) values ($1, $2)', [newReggie, 1]);
-                    capeCars = await pool.query('SELECT Reg_location.town, Reg_plates.regnumber FROM Reg_location INNER JOIN Reg_plates ON Reg_location.id = Reg_plates.reg_id WHERE Reg_location.id = 1')
+                    await pool.query('insert into reg_plates (regnumber, reg_id) values ($1, $2)', [newReggie, 1]);
+                    capeCars = await pool.query('SELECT reg_location.town, reg_plates.regnumber FROM reg_location INNER JOIN reg_plates ON reg_location.id = reg_plates.reg_id WHERE reg_location.id = 1')
 
                 }
                 if (newReggie.startsWith('CY')) {
-                    await pool.query('insert into Reg_plates (regNumber, reg_id) values ($1, $2)', [newReggie, 2]);
-                    villeCars = await pool.query('SELECT Reg_location.town, Reg_plates.regnumber FROM Reg_location INNER JOIN Reg_plates ON Reg_location.id = Reg_plates.reg_id WHERE Reg_location.id = 2')
+                    await pool.query('insert into reg_plates (regnumber, reg_id) values ($1, $2)', [newReggie, 2]);
+                    villeCars = await pool.query('SELECT reg_location.town, reg_plates.regnumber FROM reg_location INNER JOIN reg_plates ON reg_location.id = reg_plates.reg_id WHERE reg_location.id = 2')
                 }
                 if (newReggie.startsWith('CK')) {
-                    await pool.query('insert into Reg_plates (regNumber, reg_id) values ($1, $2)', [newReggie, 3])
-                    buryCars = await pool.query('SELECT Reg_location.town, Reg_plates.regnumber FROM Reg_location INNER JOIN Reg_plates ON Reg_location.id = Reg_plates.reg_id WHERE Reg_location.id = 3')
+                    await pool.query('insert into reg_plates (regnumber, reg_id) values ($1, $2)', [newReggie, 3])
+                    buryCars = await pool.query('SELECT reg_location.town, reg_plates.regnumber FROM reg_location INNER JOIN reg_plates ON reg_location.id = reg_plates.reg_id WHERE reg_location.id = 3')
                 }
             } 
             else {
@@ -46,7 +46,7 @@ module.exports = function RegCheck(pool) {
 
 
     async function allReggies() {
-        allCars = await pool.query('select * from Reg_plates');
+        allCars = await pool.query('select * from reg_plates');
         regFilter = allCars.rows
     }
 
@@ -68,22 +68,22 @@ module.exports = function RegCheck(pool) {
     };
 
     async function CAcars() {
-        capeCars = await pool.query('SELECT Reg_location.town, Reg_plates.regnumber FROM Reg_location INNER JOIN Reg_plates ON Reg_location.id = Reg_plates.reg_id WHERE Reg_location.id = 1')
+        capeCars = await pool.query('SELECT reg_location.town, reg_plates.regnumber FROM reg_location INNER JOIN reg_plates ON reg_location.id = reg_plates.reg_id WHERE reg_location.id = 1')
         regFilter = capeCars.rows;
     }
 
     async function CYcars() {
-        villeCars = await pool.query('SELECT Reg_location.town, Reg_plates.regnumber FROM Reg_location INNER JOIN Reg_plates ON Reg_location.id = Reg_plates.reg_id WHERE Reg_location.id = 2')
+        villeCars = await pool.query('SELECT reg_location.town, reg_plates.regnumber FROM reg_location INNER JOIN reg_plates ON reg_location.id = reg_plates.reg_id WHERE reg_location.id = 2')
         regFilter = villeCars.rows;
     }
 
     async function CKcars() {
-        buryCars = await pool.query('SELECT Reg_location.town, Reg_plates.regnumber FROM Reg_location INNER JOIN Reg_plates ON Reg_location.id = Reg_plates.reg_id WHERE Reg_location.id = 3')
+        buryCars = await pool.query('SELECT reg_location.town, reg_plates.regnumber FROM reg_location INNER JOIN reg_plates ON reg_location.id = reg_plates.reg_id WHERE reg_location.id = 3')
         regFilter = buryCars.rows;
     }
 
     async function resetReg() {
-        await pool.query('delete from Reg_plates');
+        await pool.query('delete from reg_plates');
     }
 
     function error() {
