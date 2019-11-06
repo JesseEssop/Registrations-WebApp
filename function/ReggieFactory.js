@@ -85,7 +85,9 @@ module.exports = function RegCheck(pool) {
     }
 
     async function resetReg() {
+        regFilter = []
         await pool.query('delete from reg_plates');
+        return regFilter;
     }
 
     function error() {
