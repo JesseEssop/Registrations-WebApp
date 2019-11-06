@@ -278,7 +278,7 @@ strong{
 }
 .Error{
   margin-top: 30px;
-  color:red;
+  color:rgb(255, 32, 32);
   font-family: 'Lato', Helvetica, sans-serif;
   font-size: 20px;
 }
