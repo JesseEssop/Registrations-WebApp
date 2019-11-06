@@ -15,6 +15,7 @@ module.exports = function ReggieRoutes(pool) {
 
         if (req.body.reset === 'reset') {
             await reggie.resetReg();
+            req.flash('error2', 'DATABASE HAS BEEN RESETED')
         }
         else {
 
