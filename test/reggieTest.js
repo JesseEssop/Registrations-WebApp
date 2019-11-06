@@ -21,10 +21,10 @@ describe('Registration Numbers test', function () {
         await pool.query('insert into reg_location (town) values ($1)', ['Malmesbury']);
     })
 
-    it('This test takes in a registration number that has special characters and returns an error', async function () {
+    it('This test takes in a registration number that does not start with CA, CY or CK and returns an error', async function () {
         var testInstance = RegCheck(pool);
-        await testInstance.add("CA 111 000");
-        assert.equal(testInstance.error(), "");
+        await testInstance.add("CL 111 000");
+        assert.equal(await testInstance.error(),"INVALID LOCATION");
     })
 
     it('This test takes in a registration number that has special characters and returns an error', async function () {
