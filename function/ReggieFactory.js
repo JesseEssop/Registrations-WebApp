@@ -21,17 +21,17 @@ module.exports = function RegCheck(pool) {
                 if (newReggie.startsWith('CA')) {
                     await pool.query('insert into reg_plates (regnumber, reg_id) values ($1, $2)', [newReggie, 1]);
                     capeCars = await pool.query('SELECT reg_location.town, reg_plates.regnumber FROM reg_location INNER JOIN reg_plates ON reg_location.id = reg_plates.reg_id WHERE reg_location.id = 1')
-                    
-                } 
+
+                }
                 else if (newReggie.startsWith('CY')) {
                     await pool.query('insert into reg_plates (regnumber, reg_id) values ($1, $2)', [newReggie, 2]);
                     villeCars = await pool.query('SELECT reg_location.town, reg_plates.regnumber FROM reg_location INNER JOIN reg_plates ON reg_location.id = reg_plates.reg_id WHERE reg_location.id = 2')
-                    
+
                 }
                 else if (newReggie.startsWith('CK')) {
                     await pool.query('insert into reg_plates (regnumber, reg_id) values ($1, $2)', [newReggie, 3])
                     buryCars = await pool.query('SELECT reg_location.town, reg_plates.regnumber FROM reg_location INNER JOIN reg_plates ON reg_location.id = reg_plates.reg_id WHERE reg_location.id = 3')
-                    
+
                 }
                 else {
                     error = "INVALID LOCATION"
@@ -44,12 +44,6 @@ module.exports = function RegCheck(pool) {
         } else {
             error = "INVALID REGISTRATION"
         }
-    }
-
-
-    async function allReggies() {
-        allCars = await pool.query('select * from reg_plates');
-        regFilter = allCars.rows
     }
 
     function testReg(reggie) {
@@ -69,19 +63,21 @@ module.exports = function RegCheck(pool) {
         return regFilter;
     };
 
-    async function CAcars() {
-        capeCars = await pool.query('SELECT reg_location.town, reg_plates.regnumber FROM reg_location INNER JOIN reg_plates ON reg_location.id = reg_plates.reg_id WHERE reg_location.id = 1')
-        regFilter = capeCars.rows;
-    }
+    async function everyCar(place) {
 
-    async function CYcars() {
-        villeCars = await pool.query('SELECT reg_location.town, reg_plates.regnumber FROM reg_location INNER JOIN reg_plates ON reg_location.id = reg_plates.reg_id WHERE reg_location.id = 2')
-        regFilter = villeCars.rows;
-    }
-
-    async function CKcars() {
-        buryCars = await pool.query('SELECT reg_location.town, reg_plates.regnumber FROM reg_location INNER JOIN reg_plates ON reg_location.id = reg_plates.reg_id WHERE reg_location.id = 3')
-        regFilter = buryCars.rows;
+        if (place === "") {
+            allCars = await pool.query('select * from reg_plates');
+            regFilter = allCars.rows
+        }
+        if (place === "CA") {
+            regFilter = capeCars.rows;
+        }
+        if (place === "CY") {
+            regFilter = villeCars.rows;
+        }
+        if (place === "CK"){
+            regFilter = buryCars.rows;
+        }
     }
 
     async function resetReg() {
@@ -97,13 +93,10 @@ module.exports = function RegCheck(pool) {
     return {
         add: addNewReg,
         testReg,
-        allReggies,
         resetReg,
         error,
-        CAcars,
-        CYcars,
-        CKcars,
-        carFilter
+        carFilter,
+        everyCar
 
     }
 }

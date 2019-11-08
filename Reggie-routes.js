@@ -37,24 +37,8 @@ module.exports = function ReggieRoutes(pool) {
 
     async function filterRoute(req, res) {
         var town = req.body.townDropDown
-        // console.log(town)
 
-        if (town === '') {
-            await reggie.allReggies();
-        }
-
-        if (town === 'CA') {
-            await reggie.CAcars()
-
-        }
-
-        if (town === 'CY') {
-            await reggie.CYcars()
-        }
-
-        if (town === 'CK') {
-            await reggie.CKcars()
-        }
+        await reggie.everyCar(town)
 
         res.redirect('/')
     }
