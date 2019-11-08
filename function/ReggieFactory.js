@@ -70,12 +70,15 @@ module.exports = function RegCheck(pool) {
             regFilter = allCars.rows
         }
         if (place === "CA") {
+            capeCars = await pool.query('SELECT reg_location.town, reg_plates.regnumber FROM reg_location INNER JOIN reg_plates ON reg_location.id = reg_plates.reg_id WHERE reg_location.id = 1')
             regFilter = capeCars.rows;
         }
         if (place === "CY") {
+            villeCars = await pool.query('SELECT reg_location.town, reg_plates.regnumber FROM reg_location INNER JOIN reg_plates ON reg_location.id = reg_plates.reg_id WHERE reg_location.id = 2')
             regFilter = villeCars.rows;
         }
         if (place === "CK"){
+            buryCars = await pool.query('SELECT reg_location.town, reg_plates.regnumber FROM reg_location INNER JOIN reg_plates ON reg_location.id = reg_plates.reg_id WHERE reg_location.id = 3')
             regFilter = buryCars.rows;
         }
     }
